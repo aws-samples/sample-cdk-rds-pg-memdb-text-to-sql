@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Build an AI-powered text-to-SQL chatbot using Amazon Bedrock, Amazon MemoryDB, and Amazon RDS
 
 To manually create a virtualenv on macOS and Linux:
