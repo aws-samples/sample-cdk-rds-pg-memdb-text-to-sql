@@ -28,13 +28,16 @@ $ pip install -r requirements.txt
 ## Prerequisites
 The following are needed in order to proceed with this post:
 
-* An AWS account.
-* A Git client to clone the source code provided.
-* Docker installed and running on the local host or laptop.
-* The AWS Command Line Interface (AWS CLI).
-* The AWS Systems Manager Session Manager plugin.
-* Amazon Bedrock model access enabled for Anthropic Claude 3.5 Sonnet and Amazon Titan Embeddings G1 – Text in the us-west-2 Region.
-* Python 3.12 with the pip package manager.
+* An [AWS account](https://aws.amazon.com/).
+* A [Git client](https://git-scm.com/downloads) to clone the source code provided.
+* [Docker](https://www.docker.com/) installed and running on the local host or laptop.
+* [Install AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting-started.html)
+* The [AWS Command Line Interface (AWS CLI)](https://aws.amazon.com/cli/).
+* The AWS Systems Manager [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html).
+* [Amazon Bedrock model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) enabled for Anthropic Claude 3.5 Sonnet and Amazon Titan Embeddings G1 – Text in the us-west-2 Region.
+* Python 3.121 or higher with the pip package manager.
+* [500,000+ US Homes Data (For Sale Properties)](https://www.kaggle.com/datasets/polartech/500000-us-homes-data-for-sale-properties)
+  * License – [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 
 At this point you can now synthesize the CloudFormation template for this code.
 
@@ -58,8 +61,8 @@ aws s3 cp "./600K US Housing Properties.csv" s3://<bucket-name>/
 
 1. Clone the repository from GitHub:
 ```
-git clone https://github.com/aws-samples/cdk-rds-pg-memdb-text-to-sql 
-cd cdk-rds-pg-memdb-text-to-sql/
+git clone https://github.com/aws-samples/sample-cdk-rds-pg-memdb-text-to-sql 
+cd sample-cdk-rds-pg-memdb-text-to-sql/
 ```
 
 2. Deploy the CDK application and specify the S3 bucket name used in the previous section as a parameter. It will take about 20-30 minutes to deploy the MemoryDB and RDS instances.
@@ -159,13 +162,13 @@ EOF
 python3 load.py
 ```
 9. Once the script completes, navigate to the AWS Lambda console from your browser - https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions
-10. Search for the function named `DataIndexerStack-DataIndexerFunction`
+10. Search for the function named [`DataIndexerStack-DataIndexerFunction`](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/DataIndexerStack-DataIndexerFunction?tab=testing)
 11. Open the function, and navigate to the Test tab. Click test. This will populate the embeddings table with database schema information.
-12. Next, search for the function named `AppStack-TextToSQLFunction`
+12. Next, search for the function named [`AppStack-TextToSQLFunction`]()
 13. Open the function, and navigate to the Test tab. Edit the Event JSON with the following:
 ```
 {
-  "query": "What are the top homes in San Francsico, CA?"
+  "query": "What are the top homes in San Francisco, CA?"
 }
 ```
 
